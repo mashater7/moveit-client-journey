@@ -6,9 +6,11 @@
   <meta name="theme-color" content="#f7f8fa">
   <meta name="description" content="Рабочая презентация для Move IT: выводы исследования, факты о компании, предлагаемое позиционирование и структура будущего сайта.">
   <title>Move IT — исследование и план сайта</title>
-  <link rel="icon" href="./favicon.svg?v=20261107-report" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=20261107-report">
-  <script src="./app.js?v=20261107-report" defer></script>
+  <link rel="icon" href="./favicon.svg?v=20261107-objections" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=20261107-objections">
+  <script src="./journey-data.js?v=20261107-objections" defer></script>
+  <script src="./journey.js?v=20261107-objections" defer></script>
+  <script src="./app.js?v=20261107-objections" defer></script>
 </head>
 <body>
 <a href="#main" class="skip">К содержанию</a>
@@ -61,19 +63,16 @@
 <section class="section section-tint" id="journey"><div class="wrap">
   <div class="section-top"><p class="eyebrow">04 / Предлагаемый путь посетителя</p><span class="status proposed">Можно переключать этапы</span></div>
   <h2>Как человек будет знакомиться с сайтом</h2>
-  <p class="section-intro">Предлагаем шесть последовательных этапов. На каждом сайт отвечает на конкретный вопрос посетителя. Для небольшого офиса и крупной компании акценты немного различаются.</p>
+  <p class="section-intro">Для небольшого офиса сначала важнее понять состав работ и цену. Для крупной компании — проверить опыт подрядчика и организацию проекта. Поэтому предлагаем разный порядок блоков. Ниже можно пройти оба пути от первого экрана до согласования работ.</p>
+  <p class="source-note">Это наша гипотеза о вопросах посетителя на основе исследования и ответов клиента. Отдельных интервью с заказчиками Move IT пока не было. Слова «разбираем возражение» означают, какую информацию даём, а не гарантируют решение человека.</p>
   <div class="persona-row"><span class="mini-label">Сценарий</span><div class="segmented" role="group" aria-label="Сценарий клиента"><button type="button" data-persona="small" aria-pressed="true">Небольшой офис</button><button type="button" data-persona="large" aria-pressed="false">Крупная компания</button></div><p id="persona-note">Нужны ориентир по цене и понятный состав работ.</p></div>
+  <section id="audience-focus" class="audience-focus" aria-label="Сильные стороны и акценты для выбранного сценария"></section>
+  <div class="journey-entry"><strong>Как человек попадает на сайт</strong><p>Из поиска, по рекомендации или по присланной ссылке. Он сравнивает варианты и хочет понять, подходит ли Move IT под его задачу. Источник визита может отличаться; маршрут ниже — предлагаемый порядок информации на странице.</p></div>
   <div class="explorer">
-    <div class="stations" role="tablist" aria-label="Этапы пути клиента" aria-orientation="vertical">
-      <button id="stage-tab-0" role="tab" aria-selected="true" aria-controls="stage-panel" data-stage="0"><span>01</span>Понять специализацию</button>
-      <button id="stage-tab-1" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="1" tabindex="-1"><span>02</span>Посмотреть проекты</button>
-      <button id="stage-tab-2" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="2" tabindex="-1"><span>03</span>Понять стоимость</button>
-      <button id="stage-tab-3" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="3" tabindex="-1"><span>04</span>Увидеть процесс</button>
-      <button id="stage-tab-4" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="4" tabindex="-1"><span>05</span>Описать задачу</button>
-      <button id="stage-tab-5" role="tab" aria-selected="false" aria-controls="stage-panel" data-stage="5" tabindex="-1"><span>06</span>Понять следующий шаг</button>
-    </div>
+    <div class="stations" role="tablist" aria-label="Этапы пути клиента" aria-orientation="vertical"></div>
     <div id="stage-panel" class="stage-panel" role="tabpanel" aria-labelledby="stage-tab-0" tabindex="0"></div>
   </div>
+  <section id="after-request" class="after-request" aria-label="Что происходит после обращения"></section>
 </div></section>
 
 <section class="wrap section" id="proof">

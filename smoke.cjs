@@ -23,12 +23,17 @@ catch { ({ chromium } = require(path.join(os.homedir(),'.cache/codex-runtimes/co
   await page.getByRole('heading',{name:'Как предлагаем позиционировать сайт',exact:true}).waitFor();
   assert.equal(await page.evaluate(()=>[...document.querySelectorAll('h1,h2,h3,.stage-question')].some(e=>getComputedStyle(e).fontStyle==='italic')),false,'No decorative italic headings');
   console.log('Checking persona / journey');
+  assert.equal(await page.locator('[data-stage]').count(),8,'Each scenario has a complete eight-block route');
   await page.getByRole('button',{name:'Крупная компания',exact:true}).click();
-  await page.getByRole('tab',{name:'03 Понять стоимость',exact:true}).click();
+  await page.getByRole('tab',{name:'06 Расчёт и документы',exact:true}).click();
   await page.getByRole('tabpanel').getByRole('heading',{name:'Индивидуальная смета после осмотра',exact:true}).waitFor();
+  await page.getByRole('tabpanel').getByText('На чём основан ответ', {exact:true}).waitFor();
   await page.getByRole('button',{name:'Небольшой офис',exact:true}).click();
+  await page.getByRole('tab',{name:'03 Стоимость',exact:true}).click();
   await page.getByRole('tabpanel').getByRole('heading',{name:'Понятная почасовая модель',exact:true}).waitFor();
-  for(let i=1;i<=6;i++) await page.locator(`[data-stage="${i-1}"]`).click();
+  await page.locator('#audience-focus').getByText('На чём делаем акцент', {exact:true}).waitFor();
+  await page.locator('#after-request').getByRole('heading',{name:'Что происходит после обращения',exact:true}).waitFor();
+  for(let i=0;i<8;i++) await page.locator(`[data-stage="${i}"]`).click();
   console.log('Checking quiz');
   await page.locator('[data-open-quiz]').first().click();
   const dialog=page.getByRole('dialog');
@@ -59,7 +64,7 @@ catch { ({ chromium } = require(path.join(os.homedir(),'.cache/codex-runtimes/co
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`No overflow at ${width}`);
     for(const persona of ['small','large']) {
       await page.locator(`[data-persona="${persona}"]`).click();
-      for(let i=0;i<6;i++) {
+      for(let i=0;i<8;i++) {
         await page.locator(`[data-stage="${i}"]`).click();
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`No stage overflow at ${width} / ${persona} / ${i}`);
       }
@@ -75,5 +80,5 @@ catch { ({ chromium } = require(path.join(os.homedir(),'.cache/codex-runtimes/co
   await page.keyboard.press('ArrowDown');
   assert.equal(await page.locator('[data-stage="3"]').getAttribute('aria-selected'),'true','Arrow-key tab navigation works');
   assert.deepEqual(errors,[],'No JavaScript errors');
-  await browser.close(); console.log('PASS: personas, six stages, validation, quiz back/forward, summary, Escape, mobile overflow, reduced motion, no JS errors');
+  await browser.close(); console.log('PASS: research, plain typography, two audiences and eight blocks each, evidence/objections, post-request flow, form validation/back, summary, keyboard, mobile, no JS errors');
 })().catch(e=>{console.error(e);process.exit(1)});

@@ -29,7 +29,7 @@ button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visibl
 .brand { text-decoration: none; font-size: 1.25rem; font-weight: 700; white-space: nowrap; }
 .brand span { color: var(--muted); font-weight: 400; font-size: .875rem; margin-left: 6px; }
 .header-caption { font-size: .8rem; color: var(--muted); }
-.contents { position: sticky; top: 0; z-index: 5; background: #fffffff5; border-bottom: 1px solid var(--line); }
+.contents { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); }
 .contents .wrap { display: flex; flex-wrap: wrap; column-gap: 28px; }
 .contents a { min-height: 50px; display: inline-flex; align-items: center; font-size: .8rem; text-decoration: none; color: var(--muted); }
 .contents a:hover { color: var(--accent); text-decoration: underline; }
@@ -86,6 +86,32 @@ button:focus-visible, a:focus-visible, summary:focus-visible, input:focus-visibl
 .block-example p { font-size: .9rem; color: var(--muted); margin-top: 8px; }
 .stage-outcome { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 18px; font-size: .875rem; color: var(--muted); }
 .stage-outcome strong { font-weight: 600; color: var(--ink); }
+.audience-focus { padding: 26px 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; margin-bottom: 26px; }
+.audience-focus > h3 { font-size: 1.2rem; }
+.audience-note { font-size: .875rem; color: var(--muted); margin-top: 12px; max-width: 80ch; }
+.audience-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; margin-top: 25px; }
+.audience-columns h4, .block-example h4 { font-size: 1rem; font-weight: 600; line-height: 1.5; margin: 0; }
+.audience-columns ul { margin: 12px 0 0; padding-left: 19px; }
+.audience-columns li { margin-top: 9px; color: var(--muted); }
+.audience-columns p { margin-top: 12px; color: var(--muted); }
+.audience-gap { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 18px; font-size: .9rem; }
+.audience-gap strong { font-weight: 600; }
+.audience-gap p { margin-top: 7px; color: var(--muted); }
+.journey-entry { margin: 28px 0; max-width: 85ch; }
+.journey-entry strong { font-weight: 600; }
+.journey-entry p { color: var(--muted); margin-top: 8px; font-size: .95rem; }
+.objection { padding: 16px 18px; border-left: 3px solid #b8c9de; background: var(--tint); font-size: .9rem; }
+.objection strong { font-weight: 600; }
+.objection p { margin-top: 7px; color: var(--muted); }
+.block-example h4 { margin-top: 7px; }
+.stage-explanation { margin-top: 25px; }
+.stage-outcome p { margin-top: 7px; }
+.after-request { margin-top: 35px; border-top: 1px solid var(--line); padding-top: 28px; }
+.after-request > p { color: var(--muted); margin-top: 12px; max-width: 85ch; }
+.after-request ol { padding-left: 22px; margin-top: 20px; }
+.after-request li { padding-left: 8px; margin-top: 18px; }
+.after-request li strong { font-weight: 600; }
+.after-request li p { color: var(--muted); margin-top: 6px; max-width: 85ch; }
 .case-feature { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; border-block: 1px solid var(--line); margin-top: 30px; padding-block: 26px; }
 .case-heading h3 { font-size: 1.2rem; margin-top: 7px; }
 .case-copy { color: var(--muted); }
@@ -204,6 +230,10 @@ dialog::backdrop { background: #25314080; }
   .stations button { font-size: .75rem; gap: 8px; min-height: 61px; padding: 10px; border-color: var(--line); }
   .stations button > span { font-size: .7rem; }
   .stage-panel { padding: 20px; }
+  .audience-focus { padding: 20px; }
+  .audience-focus > h3 { font-size: 1.1rem; }
+  .audience-columns { grid-template-columns: 1fr; gap: 23px; }
+  .objection { padding: 14px; }
   .stage-overline { font-size: .7rem; gap: 12px; }
   .stage-question { font-size: 1.15rem; margin-bottom: 20px; }
   .stage-explanation p { font-size: .95rem; }
