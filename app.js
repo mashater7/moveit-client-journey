@@ -33,16 +33,16 @@ function renderQuiz(focus=true) {
   } else if(quizStep===2) {
     heading='Какие услуги нужны?';
     description='Выберите нужные услуги или оставьте выбор на обсуждение с логистом.';
-    fields=`<fieldset><legend>Состав работ — можно выбрать несколько</legend>${services.map(service=>`<label class="choice"><input type="checkbox" name="service" value="${service}" ${answers.services.includes(service)?'checked':''}>${service}</label>`).join('')}</fieldset><p class="field-hint">Отключение и подключение техники — силами клиента. Хранение пока не включаем: собственного склада нет.</p>`;
+    fields=`<fieldset><legend>Состав работ — можно выбрать несколько</legend>${services.map(service=>`<label class="choice"><input type="checkbox" name="service" value="${service}" ${answers.services.includes(service)?'checked':''}>${service}</label>`).join('')}</fieldset><p class="field-hint">Отключение и подключение техники — силами заказчика переезда. Хранение пока не включаем: собственного склада нет.</p>`;
   } else {
     heading='Сводка запроса';
-    description='Вот что увидит клиент перед передачей запроса. Здесь ничего не отправляется.';
+    description='Так может выглядеть сводка для посетителя вашего сайта. В этом примере данные не отправляются.';
     const date=answers.date?new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(`${answers.date}T12:00:00Z`)):'Уточним при обсуждении';
-    fields=`<dl class="summary-list"><div><dt>Масштаб</dt><dd>${escapeHTML(answers.size)}</dd></div><div><dt>Маршрут</dt><dd>${escapeHTML(answers.from)} → ${escapeHTML(answers.to)}</dd></div><div><dt>Дата</dt><dd>${escapeHTML(date)}</dd></div><div><dt>Работы</dt><dd>${answers.services.length?answers.services.map(escapeHTML).join(', '):'Обсудим с логистом'}</dd></div></dl><div class="summary-next"><strong>А что будет на рабочем сайте?</strong>После сводки — контакт и согласие на обработку данных. Затем логист уточнит задачу; для крупного объекта согласует осмотр. Точный срок ответа закрепим перед запуском.</div>`;
+    fields=`<dl class="summary-list"><div><dt>Масштаб</dt><dd>${escapeHTML(answers.size)}</dd></div><div><dt>Маршрут</dt><dd>${escapeHTML(answers.from)} → ${escapeHTML(answers.to)}</dd></div><div><dt>Дата</dt><dd>${escapeHTML(date)}</dd></div><div><dt>Работы</dt><dd>${answers.services.length?answers.services.map(escapeHTML).join(', '):'Обсудим с логистом'}</dd></div></dl><div class="summary-next"><strong>А что будет на рабочем сайте?</strong>После сводки — контакт и согласие на обработку данных. Затем логист уточнит задачу; для крупного объекта согласует осмотр. Срок ответа согласуем с вами перед запуском.</div>`;
   }
   content.innerHTML=`<p class="quiz-step-label">Шаг ${quizStep+1} из 4</p><h2 id="quiz-title" class="quiz-title" tabindex="-1">${heading}</h2><p class="quiz-description">${description}</p><form id="quiz-form"><div class="quiz-fields">${fields}</div><div class="quiz-actions">${quizStep>0?'<button type="button" id="quiz-back" class="button secondary">Назад</button>':'<span></span>'}<button type="${quizStep===3?'button':'submit'}" id="quiz-next" class="button primary">${quizStep===3?'Завершить демо':quizStep===2?'Посмотреть итог':'Далее'}</button></div></form>`;
   content.querySelector('#quiz-back')?.addEventListener('click',()=>{collectAnswers();quizStep--;renderQuiz()});
-  if(quizStep===3) content.querySelector('#quiz-next').addEventListener('click',()=>dialog.close());
+  if(quizStep===3) content.querySelector('#quiz-next').addEventListener('click',()=>{dialog.close();document.dispatchEvent(new CustomEvent('moveit-demo-complete'))});
   else content.querySelector('#quiz-form').addEventListener('submit',event=>{
     event.preventDefault();
     if(quizStep===1) {
@@ -59,9 +59,9 @@ function renderQuiz(focus=true) {
   if(focus) content.querySelector('#quiz-title').focus({preventScroll:true});
 }
 
-document.querySelectorAll('[data-open-quiz]').forEach(button=>button.addEventListener('click',()=>{
-  opener=button;quizStep=0;renderQuiz(false);dialog.showModal();content.querySelector('#quiz-title').focus();
-}));
+function openQuiz(button) {opener=button;quizStep=0;renderQuiz(false);dialog.showModal();content.querySelector('#quiz-title').focus();}
+document.querySelectorAll('[data-open-quiz]').forEach(button=>button.addEventListener('click',()=>openQuiz(button)));
+document.addEventListener('moveit-open-quiz',event=>openQuiz(event.detail.opener));
 document.querySelector('#close-quiz').addEventListener('click',()=>dialog.close());
-dialog.addEventListener('close',()=>{collectAnswers();opener?.focus()});
+dialog.addEventListener('close',()=>{collectAnswers();if(opener?.isConnected)opener.focus();else document.querySelector('#stage-panel')?.focus({preventScroll:true})});
 dialog.addEventListener('click',event=>{if(event.target===dialog){const rect=dialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom) dialog.close()}});

@@ -16,5 +16,7 @@ User requested an explanatory document instead of a sales landing page. Removed 
 
 Final visual steering: restore original graphite/lime palette and cube/office SVG while retaining plain sans-serif typography and all explanatory content. Hero title describes the research document; the lime strip names its topics without service slogans.
 
+Final interaction/copy steering: address the owner directly as вы; replace the text-first explorer with a connected route map, screen previews, visited states and next/back/reset. Integrate demo-form completion into the path. Collapse background research, detailed block rationale and post-request details. Remove decorative ordinal numbers. Verify desktop/mobile connector layout, both paths, form completion/cancellation, keyboard focus and expanded background navigation.
+
 ## Review focus
 Long Russian copy and 360px screens must not overflow. Dialog must scroll and close on Escape. Empty/whitespace route fields must block next step. Persona/stage changes must show matching content. Demo must never imply a real request was sent.
