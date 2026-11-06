@@ -17,6 +17,11 @@ catch { ({ chromium } = require(path.join(os.homedir(),'.cache/codex-runtimes/co
   page.setDefaultTimeout(10000);
   console.log('Opening presentation');
   await page.goto(pathToFileURL(path.join(__dirname,'index.html')).href);
+  assert.match(await page.title(),/исследование и план сайта/,'Presentation describes the research');
+  await page.getByRole('heading',{name:'Что узнали о компании',exact:true}).waitFor();
+  await page.getByRole('heading',{name:'Что показало исследование рынка',exact:true}).waitFor();
+  await page.getByRole('heading',{name:'Как предлагаем позиционировать сайт',exact:true}).waitFor();
+  assert.equal(await page.evaluate(()=>[...document.querySelectorAll('h1,h2,h3,.stage-question')].some(e=>getComputedStyle(e).fontStyle==='italic')),false,'No decorative italic headings');
   console.log('Checking persona / journey');
   await page.getByRole('button',{name:'Крупная компания',exact:true}).click();
   await page.getByRole('tab',{name:'03 Понять стоимость',exact:true}).click();
@@ -43,7 +48,7 @@ catch { ({ chromium } = require(path.join(os.homedir(),'.cache/codex-runtimes/co
   await dialog.getByRole('button',{name:'Далее',exact:true}).click();
   assert.equal(await dialog.getByLabel('Упаковка и маркировка').isChecked(),true);
   await dialog.getByRole('button',{name:'Посмотреть итог',exact:true}).click();
-  await dialog.getByText('Ваш запрос готов к обсуждению', {exact:true}).waitFor();
+  await dialog.getByText('Сводка запроса', {exact:true}).waitFor();
   await dialog.getByText('Москва, офис А → Москва, офис Б', {exact:true}).waitFor();
   await page.keyboard.press('Escape'); assert.equal(await dialog.isVisible(),false);
   fs.mkdirSync(path.join(__dirname,'qa'),{recursive:true});
