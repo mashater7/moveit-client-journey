@@ -14,5 +14,7 @@
 ## Revision 07.11.2026
 User requested an explanatory document instead of a sales landing page. Removed serif/italic typography, promotional slogans, lime ticker and decorative hero. Added company findings, market observations and reasoning behind positioning. Further steering: explain small/large-office strengths and each objection through a concrete block. Added separate data/controller modules and eight ordered blocks per audience. Browser verification includes ordinary heading typography, both audiences/eight blocks, source/objection explanations, post-request flow, form/back/validation and widths 360/390/768.
 
+Final visual steering: restore original graphite/lime palette and cube/office SVG while retaining plain sans-serif typography and all explanatory content. Hero title describes the research document; the lime strip names its topics without service slogans.
+
 ## Review focus
 Long Russian copy and 360px screens must not overflow. Dialog must scroll and close on Escape. Empty/whitespace route fields must block next step. Persona/stage changes must show matching content. Demo must never imply a real request was sent.
